@@ -1,0 +1,5 @@
+<?php 
+    session_start();
+    header("location: ./view/manager/view_overview.php");
+
+?>
