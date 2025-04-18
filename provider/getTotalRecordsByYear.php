@@ -45,13 +45,3 @@ try {
     echo json_encode(["error" => $e->getMessage()]);
     exit;
 }
-
-// if ($month1 && $year1 && $month2 && $year2) {
-//     $data = $obj->getRecordsBySelectedYears($month1, $month2 , $year1, $year2);
-
-//     header('Content-Type: application/json');
-//     echo json_encode($data);
-// } else {
-//     header('Content-Type: application/json');
-//     echo json_encode(['error' => 'Invalid years provided.']);
-// }

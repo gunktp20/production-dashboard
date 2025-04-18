@@ -29,7 +29,7 @@ if (isset($_POST['login_manager'])) {
         if ($result == true) {
             // ทำการเก็บ SESSION ไว้เพื่อบอกว่าผู้ใช้ เข้าสู่ระบบแล้ว และ เป็น manager
             $_SESSION['logged_in'] = true;
-            header("location: ../../view/manager/view_overview.php");
+            header("location: ../../view/manager/view_employees.php");
         } else {
             // หากไม่ถูกต้องแสดงข้อความว่ารหัสไม่ถูกต้อง
             $_SESSION['error'] = "ชื่อผู้ใช้ หรือ รหัสผ่านไม่ถูกต้อง";

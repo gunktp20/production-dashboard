@@ -27,8 +27,10 @@ if (isset($_SESSION['logged_in'])) {
 
                     <form class="space-y-4" action="../../controller/manager/login_manager_controller.php" method="POST">
                         <div class="mb-8">
-                            <h3 class="text-gray-800 text-3xl font-semibold">ลงชื่อเข้าใช้</h3>
-                            <p class="text-gray-500 text-sm mt-4 leading-relaxed">ลงชื่อเข้าใช้บัญชีของคุณและสำรวจโลกแห่งความเป็นไปได้ การเดินทางของคุณเริ่มต้นที่นี่</p>
+                            <h3 class="text-gray-800 text-3xl font-semibold">เข้าสู่ระบบสำหรับผู้จัดการ</h3>
+                            <p class="text-gray-500 text-sm mt-4 leading-relaxed">
+                                กรุณาเข้าสู่ระบบเพื่อจัดการระบบพนักงานและข้อมูลต่าง ๆ ขององค์กร
+                            </p>
                         </div>
 
                         <?php
@@ -74,7 +76,14 @@ if (isset($_SESSION['logged_in'])) {
                             </button>
                         </div>
 
-                    
+                        <div class="mt-4 text-center">
+                            <p class="text-sm text-gray-600">หากคุณเป็นพนักงาน?</p>
+                            <a href="../employee/view_employee_login.php"
+                                class="inline-block mt-2 text-sm text-blue-600 hover:text-blue-800 font-medium transition">
+                                👉 คลิกที่นี่เพื่อเข้าสู่ระบบในฐานะพนักงาน
+                            </a>
+                        </div>
+
                     </form>
                 </div>
                 <div class="lg:h-[400px] md:h-[300px] max-md:mt-8">

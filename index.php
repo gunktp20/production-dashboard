@@ -1,5 +1,5 @@
 <?php 
     session_start();
-    header("location: ./view/manager/view_overview.php");
+    header("location: ./view/manager/view_employees.php");
 
 ?>

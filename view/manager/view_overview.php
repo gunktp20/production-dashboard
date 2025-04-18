@@ -44,22 +44,42 @@ $pronum_quantity_sums = $obj->getTotalProductionByProNum();
 
 <body class="bg-gray-100 font-family-karla flex">
 
-  <aside class="relative bg-blue-500 h-screen w-[350px] hidden sm:block shadow-xl">
+  <aside class="relative bg-white h-screen w-[350px] hidden sm:block shadow-xl">
     <div class="p-6">
-      <a href="#" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+      <a href="#" class="text-[#4195fc] text-3xl font-semibold uppercase hover:text-[#4195fc]">Admin</a>
     </div>
     <nav class="text-white text-base font-semibold pt-3">
-      <a href="#" class="flex items-center text-white py-4 pl-4 nav-item text-white text-md">
+      <a href="./view_analysis.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
         <i class="fa-solid fa-chart-pie mr-3"></i>
-        ภาพรวม
+        ภาพรวม & วิเคราะห์ยอดการผลิต
       </a>
-      <a href="./view_analysis.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
-        <i class="fa-solid fa-chart-column mr-3"></i>
-        วิเคราะห์
-      </a>
-      <a href="./view_compare_data.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+      <!-- <a href="./view_compare_data.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
         <i class="fa-solid fa-chart-line mr-3"></i>
         เปรียบเทียบ
+      </a> -->
+      <a href="./view_employees.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="far fa-address-book mr-3"></i>
+        รายชื่อพนักงาน
+      </a>
+      <a href="./view_add_employee.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="far fa-address-card mr-3"></i>
+        เพิ่มข้อมูลพนักงาน
+      </a>
+      <a href="./view_employees_contact.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="fas fa-phone mr-3"></i>
+        ช่องทางการติดต่อพนักงาน
+      </a>
+      <a href="./view_employees_bank.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="	fas fa-piggy-bank mr-3"></i>
+        บัญชีธนาคารพนักงาน
+      </a>
+      <a href="./view_announces.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="fas fa-bullhorn mr-3"></i>
+        ประชาสัมพันธ์ข่าวสาร
+      </a>
+      <a href="./view_add_announce.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="fas fa-edit mr-3"></i>
+        เพิ่ม ประชาสัมพันธ์ข่าวสาร
       </a>
     </nav>
   </aside>
@@ -80,43 +100,60 @@ $pronum_quantity_sums = $obj->getTotalProductionByProNum();
     </header>
 
     <!-- Mobile Header & Nav -->
-    <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden bg-blue-500">
+    <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden bg-white">
       <div class="flex items-center justify-between">
-        <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
-        <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
+        <a href="index.html" class="text-[#4195fc] text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+        <button @click="isOpen = !isOpen" class="text-[#4195fc] text-3xl focus:outline-none">
           <i x-show="!isOpen" class="fas fa-bars"></i>
           <i x-show="isOpen" class="fas fa-times"></i>
         </button>
       </div>
 
       <!-- Dropdown Nav -->
-      <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4 bg-blue-500">
-        <a href="#" class="flex items-center text-white py-4 pl-4 nav-item">
+      <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4 bg-white">
+        <a href="#" class="flex items-center py-4 pl-4 nav-item text-[#4195fc] text-sm bg-[#e9f3ff]">
           <i class="fa-solid fa-chart-pie mr-3"></i>
           ภาพรวม
         </a>
-        <a href="./view_analysis.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+        <a href="./view_analysis.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
           <i class="fa-solid fa-chart-column mr-3"></i>
-          วิเคราะห์
+          วิเคราะห์ยอดการผลิต
         </a>
-        <a href="./view_compare_data.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+        <a href="./view_compare_data.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
           <i class="fa-solid fa-chart-line mr-3"></i>
           เปรียบเทียบ
         </a>
-        <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+        <a href="./view_employees.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+          <i class="far fa-address-book mr-3"></i>
+          รายชื่อพนักงาน
+        </a>
+        <a href="./view_add_employee.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+          <i class="far fa-address-card mr-3"></i>
+          เพิ่มข้อมูลพนักงาน
+        </a>
+        <a href="./view_employees_contact.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+          <i class="fas fa-phone mr-3"></i>
+          ช่องทางการติดต่อพนักงาน
+        </a>
+        <a href="./view_employees_bank.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+          <i class="fas fa-piggy-bank mr-3"></i>
+          บัญชีธนาคารพนักงาน
+        </a>
+        <a href="#" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
           <i class="fas fa-cogs mr-3"></i>
           ช่วยเหลือ
         </a>
-        <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+        <a href="#" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
           <i class="fas fa-user mr-3"></i>
           บัญชีของฉัน
         </a>
-        <a href="../../controller/logout_controller.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+        <a href="../../controller/logout_controller.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
           <i class="fas fa-sign-out-alt mr-3"></i>
           ออกจากระบบ
         </a>
       </nav>
     </header>
+
 
     <div class="w-full overflow-x-hidden border-t flex flex-col">
       <main class="w-full flex-grow p-6">
@@ -176,22 +213,9 @@ $pronum_quantity_sums = $obj->getTotalProductionByProNum();
 
             </div>
           </div>
-
-
-                <?php
-                if ($total_quantity_prod5 <= 0 ||  $total_quantity_prod5 == null) {
-                  echo 0;
-                }
-                ?>
-
         </div>
 
-    
-
-
-
-
-        <div class="w-full mt-12">
+        <!-- <div class="w-full mt-12">
           <p class="text-xl pb-3 flex items-center">
             <i class="fas fa-list mr-3"></i> Latest Reports
           </p>
@@ -224,13 +248,14 @@ $pronum_quantity_sums = $obj->getTotalProductionByProNum();
               </tbody>
             </table>
           </div>
-        </div>
+        </div> -->
 
       </main>
 
-      <footer class="w-full bg-white text-right p-4">
+      <!-- <footer class="w-full bg-white text-right p-4">
         Built by <a target="_blank" href="#" class="underline">Kuttapat Somwang</a>.
-      </footer>
+      </footer> -->
+
     </div>
 
   </div>
@@ -244,7 +269,7 @@ $pronum_quantity_sums = $obj->getTotalProductionByProNum();
   <script>
     // ฟังก์ชันโหลดปีจาก API
     function loadAvailableYears() {
-      fetch('../../provider/getAvailableYears.php') 
+      fetch('../../provider/getAvailableYears.php')
         .then(response => response.json())
         .then(data => {
           const year1Select = document.getElementById('year1');
@@ -258,7 +283,7 @@ $pronum_quantity_sums = $obj->getTotalProductionByProNum();
             option1.value = yearObj.year;
             option1.textContent = yearObj.year;
 
-            const option2 = option1.cloneNode(true); 
+            const option2 = option1.cloneNode(true);
 
             year1Select.appendChild(option1);
             year2Select.appendChild(option2);
@@ -287,7 +312,7 @@ $pronum_quantity_sums = $obj->getTotalProductionByProNum();
             const ctx = document.getElementById('doughnutChart').getContext('2d');
 
             if (window.myDoughnutChart) {
-              window.myDoughnutChart.destroy(); 
+              window.myDoughnutChart.destroy();
             }
 
             window.myDoughnutChart = new Chart(ctx, {

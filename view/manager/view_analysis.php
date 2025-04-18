@@ -11,7 +11,16 @@ include_once "../../model/method_stmt.php";
 
 $obj = new method_stmt();
 // เรียกดูข้อมูลพนักงานทั้งหมด
-// $result2 = $obj->getAllEmployees();
+$total_quantity_prod1 = $obj->getTotalProduction1Quantity();
+$total_quantity_prod2 = $obj->getTotalProduction2Quantity();
+$total_quantity_prod3 = $obj->getTotalProduction3Quantity();
+$total_quantity_prod4 = $obj->getTotalProduction4Quantity();
+$total_quantity_prod5 = $obj->getTotalProduction5Quantity();
+// $no = 1
+
+$pronum_quantity_sums = $obj->getTotalProductionByProNum();
+
+$obj = new method_stmt();
 $no = 1
 ?>
 
@@ -37,28 +46,52 @@ $no = 1
 
 <body class="bg-gray-100 font-family-karla flex">
 
-  <aside class="relative bg-blue-500 h-screen w-[350px] hidden sm:block shadow-xl">
+  <aside class="relative bg-white h-screen w-[350px] hidden sm:block shadow-xl">
     <div class="p-6">
-      <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
-      <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-        <i class="fas fa-plus mr-3"></i> New Report
-      </button> -->
+      <a href="#" class="text-[#4195fc] text-3xl font-semibold uppercase hover:text-[#4195fc]">Admin</a>
     </div>
     <nav class="text-white text-base font-semibold pt-3">
-      <a href="./view_overview.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
-        <i class="fa-solid fa-chart-pie mr-3"></i>
+      <!-- <a href="./view_overview.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+
         ภาพรวม
+      </a> -->
+      <a href="#" class="flex items-center py-4 pl-4 nav-item text-[#4195fc] text-sm bg-[#e9f3ff]">
+        <!-- <i class="fa-solid fa-chart-column mr-3"></i> -->
+        <i class="fa-solid fa-chart-pie mr-3"></i>
+        ภาพรวม & วิเคราะห์ยอดการผลิต
       </a>
-      <a href="#" class="flex items-center t py-4 pl-4 text-white nav-item">
-        <i class="fa-solid fa-chart-column mr-3"></i>
-        วิเคราะห์
-      </a>
-      <a href="./view_compare_data.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+      <!-- <a href="./view_compare_data.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
         <i class="fa-solid fa-chart-line mr-3"></i>
         เปรียบเทียบ
+      </a> -->
+      <a href="./view_employees.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="far fa-address-book mr-3"></i>
+        รายชื่อพนักงาน
+      </a>
+      <a href="./view_add_employee.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="far fa-address-card mr-3"></i>
+        เพิ่มข้อมูลพนักงาน
+      </a>
+      <a href="./view_employees_contact.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="fas fa-phone mr-3"></i>
+        ช่องทางการติดต่อพนักงาน
+      </a>
+      <a href="./view_employees_bank.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="fas fa-piggy-bank mr-3"></i>
+        บัญชีธนาคารพนักงาน
+      </a>
+      <a href="./view_announces.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="fas fa-bullhorn mr-3"></i>
+        ประชาสัมพันธ์ข่าวสาร
+      </a>
+      <a href="./view_add_announce.php" class="flex items-center text-gray-800 opacity-75 text-sm hover:opacity-100 py-4 pl-4 nav-item">
+        <i class="fas fa-edit mr-3"></i>
+        เพิ่ม ประชาสัมพันธ์ข่าวสาร
       </a>
     </nav>
   </aside>
+
+
 
   <div class="w-full flex flex-col h-screen overflow-y-hidden">
     <!-- Desktop Header -->
@@ -76,52 +109,125 @@ $no = 1
     </header>
 
     <!-- Mobile Header & Nav -->
-    <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden bg-blue-500">
+    <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden bg-white">
       <div class="flex items-center justify-between">
-        <a href="#" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
-        <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
+        <a href="index.html" class="text-[#4195fc] text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+        <button @click="isOpen = !isOpen" class="text-[#4195fc] text-3xl focus:outline-none">
           <i x-show="!isOpen" class="fas fa-bars"></i>
           <i x-show="isOpen" class="fas fa-times"></i>
         </button>
       </div>
 
       <!-- Dropdown Nav -->
-      <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4 bg-blue-500">
-        <a href="./view_overview.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+      <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4 bg-white">
+        <a href="./view_overview.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
           <i class="fa-solid fa-chart-pie mr-3"></i>
           ภาพรวม
         </a>
-        <a href="#" class="flex items-center text-white text-white  py-4 pl-4 nav-item">
+        <a href="#" class="flex items-center py-4 pl-4 nav-item text-[#4195fc] text-sm bg-[#e9f3ff]">
           <i class="fa-solid fa-chart-column mr-3"></i>
-          วิเคราะห์
+          วิเคราะห์ยอดการผลิต
         </a>
-        <a href="./view_compare_data.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+        <a href="./view_compare_data.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
           <i class="fa-solid fa-chart-line mr-3"></i>
           เปรียบเทียบ
         </a>
-        <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+        <a href="./view_employees.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+          <i class="far fa-address-book mr-3"></i>
+          รายชื่อพนักงาน
+        </a>
+        <a href="./view_add_employee.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+          <i class="far fa-address-card mr-3"></i>
+          เพิ่มข้อมูลพนักงาน
+        </a>
+        <a href="./view_employees_contact.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+          <i class="fas fa-phone mr-3"></i>
+          ช่องทางการติดต่อพนักงาน
+        </a>
+        <a href="./view_employees_bank.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+          <i class="fas fa-piggy-bank mr-3"></i>
+          บัญชีธนาคารพนักงาน
+        </a>
+        <a href="#" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
           <i class="fas fa-cogs mr-3"></i>
           ช่วยเหลือ
         </a>
-        <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+        <a href="#" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
           <i class="fas fa-user mr-3"></i>
           บัญชีของฉัน
         </a>
-        <a href="../../controller/logout_controller.php" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
+        <a href="../../controller/logout_controller.php" class="flex items-center text-gray-800 opacity-75 hover:opacity-100 py-4 pl-4 nav-item">
           <i class="fas fa-sign-out-alt mr-3"></i>
           ออกจากระบบ
         </a>
       </nav>
     </header>
 
+
     <div class="w-full overflow-x-hidden border-t flex flex-col">
       <main class="w-full flex-grow p-6 ">
-        <h1 class="text-3xl text-black pb-6">วิเคราะห์</h1>
+        <h1 class="text-3xl text-black pb-6">ภาพรวม & วิเคราะห์ยอดการผลิต</h1>
+
+        <div class="flex flex-wrap mt-6">
+
+          <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
+            <div class="p-6 py-2 bg-white border-[1px] border-gray-200">
+              <p class="text-[16px] pb-3 flex items-center">
+                จำนวน ตัด
+              </p>
+              <p class="text-[22px] flex items-center text-blue-600">
+                <?=
+                $total_quantity_prod1
+                ?>
+              </p>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-1/2 pl-0 lg:pl-2 mt-2 lg:mt-0 mb-4">
+            <div class="p-6 py-2 bg-white border-[1px] border-gray-200">
+              <p class="text-[16px] pb-3 flex items-center">
+                จำนวน CNC
+              </p>
+              <p class="text-[22px] flex items-center text-blue-600">
+                <?=
+                $total_quantity_prod2
+                ?>
+              </p>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
+            <div class="p-6 py-2 bg-white border-[1px] border-gray-200">
+              <p class="text-[16px] pb-3 flex items-center">
+                จำนวน ข้อเสือ
+              </p>
+              <p class="text-[22px] flex items-center text-blue-600">
+                <?=
+                $total_quantity_prod3
+                ?>
+              </p>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-1/2 pl-0 lg:pl-2 mt-2 lg:mt-0 mb-4">
+            <div class="p-6 py-2 bg-white border-[1px] border-gray-200">
+              <p class="text-[16px] pb-3 flex items-center">
+                จำนวน พับ
+              </p>
+              <p class="text-[22px] flex items-center text-blue-600">
+                <?=
+                $total_quantity_prod4
+                ?>
+              </p>
+
+            </div>
+          </div>
+        </div>
 
         <div class="flex flex-wrap mt-6">
           <div class="w-full bg-white p-6">
             <div class="flex flex-col gap-3 mb-2">
-              <div class="text-sm">วิเคราะห์ยอดการผลิตของชิ้นส่วน ตาม เดือน/ปี</div>
+              <div class="text-sm">วิเคราะห์ยอดการผลิตยอดการผลิตของชิ้นส่วน ตาม เดือน/ปี</div>
               <!-- <div class="flex gap-3 h-[35px] mb-2 items-center justify-between"> -->
               <div class="gap-3 h-[100px] justify-between flex flex-col lg:flex-row lg:h-[35px]">
                 <!-- Left -->
@@ -133,14 +239,14 @@ $no = 1
                   <select class="border-[1px] w-[100px] border-gray-300 pl-1 h-[100%]" id="year">
                   </select>
 
-                  <button id="analysis_button_1" class="bg-blue-500 text-white px-4 hover:bg-blue-600 transition-all text-[15px] h-[100%]">วิเคราะห์</button>
+                  <button id="analysis_button_1" type="button" class="bg-blue-500 text-white px-4 hover:bg-blue-600 transition-all text-[15px] h-[100%]">วิเคราะห์ยอดการผลิต</button>
                 </div>
                 <!-- Right -->
                 <div class="flex  h-[35px] items-center gap-3">
                   <div class="text-[15.5px]">รูปแบบการแสดงผล</div>
                   <select class="border-[1px] w-[170px] border-gray-300 pl-1 h-[100%]" id="chart-type">
                     <option value="bar">Bar Chart</option>
-                    <option value="line">Line Chart</option>
+                    <!-- <option value="line">Line Chart</option> -->
                   </select>
 
                 </div>
@@ -151,7 +257,7 @@ $no = 1
               กรุณาเลือกปีที่จะทำการเปรียบเทียบ
             </div>
 
-       
+
             <div class="p-6">
               <canvas id="bar_chart" width="400" height="150" style="display:none"></canvas>
             </div>
@@ -254,30 +360,34 @@ $no = 1
         "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
       ];
       const currentYear = new Date().getFullYear();
-      const startYear = currentYear - 10; 
-      const endYear = currentYear + 10; 
+      const startYear = currentYear - 10;
+      const endYear = currentYear + 10;
 
       function populateSelect(selectId, options) {
         const select = document.getElementById(selectId);
         options.forEach(option => {
           const opt = document.createElement("option");
           opt.value = option;
-          opt.textContent = option.toString(); 
+          opt.textContent = option.toString();
           select.appendChild(opt);
         });
       }
 
       populateSelect("month", months);
 
-      const yearOptions = Array.from({
-        length: endYear - startYear + 1
-      }, (_, i) => (startYear + i).toString());
+      // const yearOptions = Array.from({
+      //   length: endYear - startYear + 1
+      // }, (_, i) => (startYear + i).toString());
+      const yearOptions = [2021, 2022, 2023, 2024, 2025]
       populateSelect("year", yearOptions);
 
     });
 
     var month
-    document.getElementById('analysis_button_1').addEventListener('click', async () => {
+    document.getElementById('analysis_button_1').addEventListener('click', async (event) => {
+
+      event.preventDefault(); // 👈 ป้องกันการ scroll หรือ submit
+
       month = document.getElementById('month').value;
       const year = document.getElementById('year').value;
       const chartType = document.getElementById('chart-type').value;
@@ -350,6 +460,10 @@ $no = 1
         }).catch(error => console.error('Error fetching data:', error));
 
       const canvas = document.getElementById('bar_chart');
+      if (!canvas) {
+        console.error("❌ Canvas not found!");
+        return; // ป้องกันไปต่อ
+      }
       const ctx = canvas.getContext('2d');
 
       if (canvas.barChart) {
@@ -397,7 +511,18 @@ $no = 1
           }
         }
       });
+
+      canvas.scrollIntoView({
+        // behavior: 'smooth',
+        block: 'start' // หรือ 'center' / 'end' แล้วแต่ที่ต้องการ
+      });
+
       // End
+    });
+
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
     });
   </script>
 
